@@ -6,7 +6,7 @@
 /*   By: gcampos <gcampos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/01 18:57:52 by gcampos           #+#    #+#             */
-/*   Updated: 2026/11/04 19:52:31 by gcampos          ###   ########.fr       */
+/*   Updated: 2026/11/05 11:56:08 by gcampos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stddef.h>
+# include <stdlib.h>
 
 typedef struct s_list
 {
@@ -43,5 +44,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+int		ft_atoi(const char *nptr);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strdup(const char *s);
 
 #endif
