@@ -6,7 +6,7 @@
 /*   By: gcampos <gcampos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 11:29:43 by gcampos           #+#    #+#             */
-/*   Updated: 2026/11/05 11:35:21 by gcampos          ###   ########.fr       */
+/*   Updated: 2026/11/06 21:59:00 by gcampos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * sign);
 }
- 
