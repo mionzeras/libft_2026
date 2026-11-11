@@ -6,7 +6,7 @@
 /*   By: gcampos <gcampos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 19:07:27 by gcampos           #+#    #+#             */
-/*   Updated: 2026/11/06 19:29:52 by gcampos          ###   ########.fr       */
+/*   Updated: 2026/11/10 22:25:04 by gcampos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcat(joined, s2, len1 + len2 + 1);
 	return (joined);
 }
-
-// int main()
-// {
-// 	char	*s3 = ft_strjoin("Gabriel ", "Augusto");
-// 	printf("s3: %s\n", s3);
-// }
