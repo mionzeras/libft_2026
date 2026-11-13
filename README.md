@@ -1,7 +1,6 @@
 This project has been created as part of the 42 curriculum by gcampos.
 
-Libft
-Description
+*Description*
 
 Libft is a project from the 42 School curriculum whose main goal is to recreate several functions from the standard C library, as well as implement additional utility functions.
 
