@@ -6,7 +6,7 @@
 /*   By: gcampos <gcampos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 18:35:16 by gcampos           #+#    #+#             */
-/*   Updated: 2026/11/04 19:50:39 by gcampos          ###   ########.fr       */
+/*   Updated: 2026/11/13 14:58:45 by gcampos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)&s[i]);
 		i--;
 	}
-	return ((char *)&s[i]);
+	return (NULL);
 }

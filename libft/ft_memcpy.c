@@ -6,7 +6,7 @@
 /*   By: gcampos <gcampos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 15:53:18 by gcampos           #+#    #+#             */
-/*   Updated: 2026/11/04 15:58:38 by gcampos          ###   ########.fr       */
+/*   Updated: 2026/11/13 16:03:56 by gcampos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	const unsigned char	*s;
 	size_t				i;
 
+	if (!dest && !src)
+		return (NULL);
 	d = dest;
 	s = src;
 	i = 0;
