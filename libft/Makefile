@@ -2,9 +2,10 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-GREEN = \033[1;32m #green color
-BLUE = \033[1;34m #blue color
-RESET = \033[0m #reset to default color
+#Colors
+GREEN = \033[1;32m
+BLUE = \033[1;34m
+RESET = \033[0m
 
 PART1 = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c \
 		ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
@@ -44,8 +45,8 @@ fclean: clean
 
 re: fclean all
 
-teste: all
+test: $(NAME)
 	@echo "Creating test executable..."
-	@$(CC) $(CFLAGS) main.c $(NAME) -o teste
+	@$(CC) $(CFLAGS) main.c $(NAME) -o test
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test

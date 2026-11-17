@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by <gcampos>.*
+*This project has been created as part of the 42 curriculum by gcampos.*
 
 # Libft
 
@@ -98,7 +98,7 @@ typedef struct s_list
 Clone the repository and build the library:
 
 ```bash
-git clone <git@github.com:mionzeras/libft_2026.git> libft
+git clone https://github.com/mionzeras/libft_2026.git libft
 cd libft
 make
 ```
@@ -113,6 +113,7 @@ This creates the static library `libft.a` at the root of the repository.
 | `make clean` | Removes the object files (`.o`) |
 | `make fclean` | Removes the object files and `libft.a` |
 | `make re` | Runs `fclean` and then `all` |
+| `make teste` | Builds the library, compiles `main.c` and runs the tests |
 
 #### Using the library
 
@@ -143,6 +144,30 @@ cc -Wall -Wextra -Werror main.c -L. -lft -o my_program
 
 > **Note:** `strlcpy`, `strlcat` and `bzero` are not part of glibc by default. To compare `ft_` versions with the originals on Linux, include `<bsd/string.h>` and compile with `-lbsd`.
 
+#### Testing
+
+The repository includes a `main.c` that tests every function of the library. For each function it prints a header and the result of each call, side by side with the original libc function (`orig`) when one exists, or with the expected value (`esp`) otherwise:
+
+```
+**************** ft_strchr ****************
+strchr(s, 'o')                       ft: "o world"  orig: "o world"
+strchr(s, 'z')                       ft: NULL  orig: NULL
+```
+
+Any line where the results don't match is marked with `<-- diferente`.
+
+```bash
+make teste
+```
+
+To check for memory leaks:
+
+```bash
+valgrind --leak-check=full ./teste
+```
+
+> `main.c` and the `teste` rule are only here for study and testing. They are not part of the 42 submission.
+
 ### Resources
 
 #### References
@@ -160,14 +185,15 @@ AI was used as a **study tool**, not to generate the project's code:
 
 - **Understanding concepts**: to get explanations of how some functions work (for example, the difference between `memcpy` and `memmove` with overlapping memory) and of memory concepts such as dynamic allocation with `malloc`/`free`, pointers and memory leaks.
 - **Documentation**: to help write and structure this README.
+- **Tests**: to help create the `main.c` test file, which compares the library functions with the originals.
 
-All the code in this repository was written, tested and reviewed by me.
+All the library code (`ft_*.c`, `libft.h` and `Makefile`) was written, tested and reviewed by me.
 
 ---
 
 ## Português
 
-*Este projeto foi criado como parte do currículo da 42 por <seu_login>.*
+*Este projeto foi criado como parte do currículo da 42 por gcampos.*
 
 > A sua primeira biblioteca: uma coleção de funções em C reimplementadas do zero, para serem reutilizadas nos próximos projetos da 42.
 
@@ -259,7 +285,7 @@ typedef struct s_list
 Clone o repositório e compile a biblioteca:
 
 ```bash
-git clone <url_do_seu_repositorio> libft
+git clone https://github.com/mionzeras/libft_2026.git libft
 cd libft
 make
 ```
@@ -274,6 +300,7 @@ Isso cria a biblioteca estática `libft.a` na raiz do repositório.
 | `make clean` | Remove os arquivos objeto (`.o`) |
 | `make fclean` | Remove os arquivos objeto e a `libft.a` |
 | `make re` | Executa `fclean` e depois `all` |
+| `make teste` | Compila a biblioteca e o `main.c` e roda os testes |
 
 #### Usando a biblioteca
 
@@ -304,6 +331,30 @@ cc -Wall -Wextra -Werror main.c -L. -lft -o meu_programa
 
 > **Nota:** `strlcpy`, `strlcat` e `bzero` não fazem parte da glibc por padrão. Para comparar as versões `ft_` com as originais no Linux, inclua `<bsd/string.h>` e compile com `-lbsd`.
 
+#### Testes
+
+O repositório inclui um `main.c` que testa todas as funções da biblioteca. Para cada função ele mostra um cabeçalho e o resultado de cada chamada, lado a lado com o da função original da libc (`orig`) quando ela existe, ou com o valor esperado (`esp`) quando não existe:
+
+```
+**************** ft_strchr ****************
+strchr(s, 'o')                       ft: "o world"  orig: "o world"
+strchr(s, 'z')                       ft: NULL  orig: NULL
+```
+
+Qualquer linha em que os resultados não batem é marcada com `<-- diferente`.
+
+```bash
+make teste
+```
+
+Para verificar memory leaks:
+
+```bash
+valgrind --leak-check=full ./teste
+```
+
+> O `main.c` e a regra `teste` estão aqui só para estudo e testes. Não fazem parte da entrega da 42.
+
 ### Recursos
 
 #### Referências
@@ -321,5 +372,6 @@ A IA foi usada como **ferramenta de estudo**, e não para gerar o código do pro
 
 - **Entendimento de conceitos**: para obter explicações sobre o funcionamento de algumas funções (por exemplo, a diferença entre `memcpy` e `memmove` quando há sobreposição de memória) e sobre conceitos de memória, como alocação dinâmica com `malloc`/`free`, ponteiros e memory leaks.
 - **Documentação**: para ajudar a escrever e estruturar este README.
+- **Testes**: para ajudar a criar o arquivo de testes `main.c`, que compara as funções da biblioteca com as originais.
 
-Todo o código deste repositório foi escrito, testado e revisado por mim.
+Todo o código da biblioteca (`ft_*.c`, `libft.h` e `Makefile`) foi escrito, testado e revisado por mim.
