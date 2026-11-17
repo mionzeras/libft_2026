@@ -98,7 +98,7 @@ typedef struct s_list
 Clone the repository and build the library:
 
 ```bash
-git clone <your_repository_url> libft
+git clone <git@github.com:mionzeras/libft_2026.git> libft
 cd libft
 make
 ```
