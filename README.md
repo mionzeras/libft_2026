@@ -146,15 +146,15 @@ cc -Wall -Wextra -Werror main.c -L. -lft -o my_program
 
 #### Testing
 
-The repository includes a `main.c` that tests every function of the library. For each function it prints a header and the result of each call, side by side with the original libc function (`orig`) when one exists, or with the expected value (`esp`) otherwise:
+The repository includes a `main.c` that tests every function of the library. For each function it prints a header with the result of my function (`ft`) and, right below, the result of the original libc function (`orig`) when one exists, or the expected value (`esp`) otherwise:
 
 ```
-**************** ft_strchr ****************
-strchr(s, 'o')                       ft: "o world"  orig: "o world"
-strchr(s, 'z')                       ft: NULL  orig: NULL
+****************** ft_strchr ******************
+ft:   ad money
+orig: ad money
 ```
 
-Any line where the results don't match is marked with `<-- diferente`.
+Just compare the two lines.
 
 ```bash
 make teste
@@ -333,15 +333,15 @@ cc -Wall -Wextra -Werror main.c -L. -lft -o meu_programa
 
 #### Testes
 
-O repositório inclui um `main.c` que testa todas as funções da biblioteca. Para cada função ele mostra um cabeçalho e o resultado de cada chamada, lado a lado com o da função original da libc (`orig`) quando ela existe, ou com o valor esperado (`esp`) quando não existe:
+O repositório inclui um `main.c` que testa todas as funções da biblioteca. Para cada função ele mostra um cabeçalho com o resultado da minha função (`ft`) e, logo abaixo, o da função original da libc (`orig`) quando ela existe, ou o valor esperado (`esp`) quando não existe:
 
 ```
-**************** ft_strchr ****************
-strchr(s, 'o')                       ft: "o world"  orig: "o world"
-strchr(s, 'z')                       ft: NULL  orig: NULL
+****************** ft_strchr ******************
+ft:   ad money
+orig: ad money
 ```
 
-Qualquer linha em que os resultados não batem é marcada com `<-- diferente`.
+É só comparar as duas linhas.
 
 ```bash
 make teste
