@@ -1,192 +1,325 @@
-This project has been created as part of the 42 curriculum by gcampos.
+*This project has been created as part of the 42 curriculum by <gcampos>.*
 
-*Description*
+# Libft
 
-Libft is a project from the 42 School curriculum whose main goal is to recreate several functions from the standard C library, as well as implement additional utility functions.
+🇬🇧 [English](#english) | 🇧🇷 [Português](#português)
 
-The objective is to build a personal C library from scratch, gaining a deeper understanding of the C language and its fundamental concepts, such as pointers, memory allocation, string manipulation and data structures.
+---
 
-The project results in a static library named libft.a, which can be reused in future C projects.
+## English
 
-Instructions
-Compilation
+> Your very first own library: a collection of C functions reimplemented from scratch, to be reused in future 42 projects.
 
-The project uses a Makefile to automate the compilation process.
+### Description
 
-To compile the library, run:
+C programming can be quite tedious without the standard library. The goal of **Libft** is to understand how these functions work internally by rewriting them yourself, and to build a personal static library, `libft.a`, that can be used in later projects of the 42 curriculum.
 
-bash
+The project is divided into three parts:
+
+1. **Libc functions**: reimplementations of standard functions (`strlen`, `memcpy`, `atoi`, `calloc`…), with the same prototypes and behavior as the originals (as described in their man pages), but with the `ft_` prefix.
+2. **Additional functions**: useful functions that do not exist in the libc, or exist in a different form (`ft_split`, `ft_strjoin`, `ft_itoa`…).
+3. **Linked lists**: functions to create and manipulate singly linked lists using the `t_list` structure.
+
+#### Project rules
+
+- Written in C, following the 42 **Norm**.
+- Compiled with `cc` and the flags `-Wall -Wextra -Werror`.
+- No global variables; helper functions are declared `static`.
+- The library is built with `ar` (the use of `libtool` is forbidden).
+- No memory leaks and no unexpected crashes (segfault, bus error, double free…).
+
+### Library overview
+
+#### Part 1 – Libc functions
+
+| Category | Functions |
+| --- | --- |
+| Character checks | `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint` |
+| Character conversion | `ft_toupper`, `ft_tolower` |
+| Memory | `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp` |
+| Strings | `ft_strlen`, `ft_strlcpy`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr` |
+| Conversion | `ft_atoi` |
+| Allocation (`malloc`) | `ft_calloc`, `ft_strdup` |
+
+The character check functions return `1` if the character matches the tested class and `0` otherwise.
+
+#### Part 2 – Additional functions
+
+| Function | Description |
+| --- | --- |
+| `ft_substr` | Returns a new substring of `s`, starting at index `start`, with a maximum length of `len`. |
+| `ft_strjoin` | Returns a new string made by concatenating `s1` and `s2`. |
+| `ft_strtrim` | Returns a copy of `s1` with the characters in `set` removed from the beginning and the end. |
+| `ft_split` | Splits `s` using the delimiter `c` and returns a `NULL`-terminated array of strings. |
+| `ft_itoa` | Converts an integer (negatives included) into a newly allocated string. |
+| `ft_strmapi` | Applies `f` to each character of `s` (with its index) and returns a new string with the results. |
+| `ft_striteri` | Applies `f` to each character of `s`, passed by address so it can be modified in place. |
+| `ft_putchar_fd` | Writes the character `c` to the file descriptor `fd`. |
+| `ft_putstr_fd` | Writes the string `s` to the file descriptor `fd`. |
+| `ft_putendl_fd` | Writes the string `s` followed by a newline to `fd`. |
+| `ft_putnbr_fd` | Writes the integer `n` to `fd`. |
+
+#### Part 3 – Linked lists
+
+The following structure is declared in `libft.h`:
+
+```c
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+```
+
+- `content`: the data stored in the node (`void *` allows any type of data).
+- `next`: the address of the next node, or `NULL` if it is the last one.
+
+| Function | Description |
+| --- | --- |
+| `ft_lstnew` | Allocates and returns a new node with the given `content` and `next` set to `NULL`. |
+| `ft_lstadd_front` | Adds a node at the beginning of the list. |
+| `ft_lstadd_back` | Adds a node at the end of the list. |
+| `ft_lstsize` | Counts the number of nodes in the list. |
+| `ft_lstlast` | Returns the last node of the list. |
+| `ft_lstdelone` | Frees the content of a node with `del`, then frees the node (but not the next one). |
+| `ft_lstclear` | Deletes and frees a node and all its successors, then sets the list pointer to `NULL`. |
+| `ft_lstiter` | Applies `f` to the content of every node. |
+| `ft_lstmap` | Creates a new list from the results of applying `f` to each node's content (uses `del` if an allocation fails). |
+
+### Instructions
+
+#### Requirements
+
+- A Unix-like system (Linux or macOS)
+- `cc` (or `gcc`/`clang`) and `make`
+
+#### Compilation
+
+Clone the repository and build the library:
+
+```bash
+git clone <your_repository_url> libft
+cd libft
 make
+```
 
+This creates the static library `libft.a` at the root of the repository.
 
-This command compiles the source files and generates the static library libft.a.
+#### Makefile rules
 
-Makefile Rules
+| Rule | Description |
+| --- | --- |
+| `make` / `make all` | Compiles the sources and creates `libft.a` |
+| `make clean` | Removes the object files (`.o`) |
+| `make fclean` | Removes the object files and `libft.a` |
+| `make re` | Runs `fclean` and then `all` |
 
-The following commands are available:
+#### Using the library
 
-Command	Description
-make	Compiles the library.
-make all	Executes the default compilation rule.
-make clean	Removes all object files (.o).
-make fclean	Removes object files and the library (libft.a).
-make re	Removes previously generated files and recompiles the library.
-Using the Library
+Include the header in your code:
 
-To use Libft in another C project:
-
-Include the library header in your source file:
-c
+```c
 #include "libft.h"
 
-Compile your program together with the library:
-bash
-cc main.c -L. -lft -I. -o program
+int	main(void)
+{
+	char	*s;
 
-Run the executable:
-bash
-./program
+	s = ft_strjoin("Hello, ", "42!");
+	if (!s)
+		return (1);
+	ft_putendl_fd(s, 1);
+	free(s);
+	return (0);
+}
+```
 
+Then compile your program by linking it with `libft.a`:
 
-Make sure that libft.a and libft.h are accessible from the specified paths.
+```bash
+cc -Wall -Wextra -Werror main.c -L. -lft -o my_program
+./my_program
+```
 
-Testing
+> **Note:** `strlcpy`, `strlcat` and `bzero` are not part of glibc by default. To compare `ft_` versions with the originals on Linux, include `<bsd/string.h>` and compile with `-lbsd`.
 
-The library can be tested using custom test programs and external testers.
+### Resources
 
-To test the project:
+#### References
 
-Clone the repository.
-Compile the library using make.
-Run your custom test program or an external Libft tester.
+- Linux man pages for each original function (`man 3 strlen`, `man 3 memmove`, etc.)
+- [Makefile Tutorial](https://makefiletutorial.com/): complete guide to writing Makefiles
+- [Learn make in 60 seconds – Jacob Sorber](https://www.youtube.com/watch?v=a8mPKBxQ9No)
+- [How To Make a Makefile for Beginners! – HenrikM Dev](https://www.youtube.com/watch?v=HmbByRhh3Sk)
+- [All you need to know about linked lists, Libft – Oceano](https://www.youtube.com/watch?v=mkZYMKwKkvI)
+- [Short introduction to linked lists in C – CodeVault](https://www.youtube.com/watch?v=uBZHMkpsTfg)
 
-Some useful external testers are:
+#### Use of AI
 
-libftTester – Tripouille
-libft-unit-test – alelievr
+AI was used as a **study tool**, not to generate the project's code:
 
-These testers help check the behaviour of the implemented functions, including edge cases and memory management.
+- **Understanding concepts**: to get explanations of how some functions work (for example, the difference between `memcpy` and `memmove` with overlapping memory) and of memory concepts such as dynamic allocation with `malloc`/`free`, pointers and memory leaks.
+- **Documentation**: to help write and structure this README.
 
-After testing, generated files can be removed using:
+All the code in this repository was written, tested and reviewed by me.
 
-bash
-make fclean
+---
 
-Library Overview
+## Português
 
-The Libft library contains several groups of functions, each designed for a specific purpose.
+*Este projeto foi criado como parte do currículo da 42 por <seu_login>.*
 
-1. Character Functions
+> A sua primeira biblioteca: uma coleção de funções em C reimplementadas do zero, para serem reutilizadas nos próximos projetos da 42.
 
-Functions used to check and manipulate individual characters.
+### Descrição
 
-ft_isalpha – Checks whether a character is alphabetic.
-ft_isdigit – Checks whether a character is a digit.
-ft_isalnum – Checks whether a character is alphanumeric.
-ft_isascii – Checks whether a character belongs to the ASCII character set.
-ft_isprint – Checks whether a character is printable.
-ft_toupper – Converts a lowercase character to uppercase.
-ft_tolower – Converts an uppercase character to lowercase.
-2. String Functions
+Programar em C pode ser bem trabalhoso sem a biblioteca padrão. O objetivo da **Libft** é entender como essas funções funcionam por dentro, reescrevendo-as, e criar uma biblioteca estática própria, `libft.a`, que poderá ser usada nos próximos projetos do currículo da 42.
 
-Functions for manipulating and analysing strings.
+O projeto é dividido em três partes:
 
-ft_strlen – Calculates the length of a string.
-ft_strlcpy – Copies a string with size limitation.
-ft_strlcat – Concatenates strings with size limitation.
-ft_strchr – Searches for a character in a string.
-ft_strrchr – Searches for the last occurrence of a character.
-ft_strncmp – Compares two strings.
-ft_strnstr – Searches for a substring within a string.
-ft_strdup – Duplicates a string.
-3. Memory Functions
+1. **Funções da libc**: reimplementação de funções padrão (`strlen`, `memcpy`, `atoi`, `calloc`…), com os mesmos protótipos e comportamentos das originais (conforme as man pages), mas com o prefixo `ft_`.
+2. **Funções adicionais**: funções úteis que não existem na libc, ou que existem de outra forma (`ft_split`, `ft_strjoin`, `ft_itoa`…).
+3. **Listas ligadas**: funções para criar e manipular listas ligadas simples usando a estrutura `t_list`.
 
-Functions for allocating, manipulating and comparing memory blocks.
+#### Regras do projeto
 
-ft_memset – Fills a memory area with a specified value.
-ft_bzero – Sets a memory area to zero.
-ft_memcpy – Copies data between memory areas.
-ft_memmove – Copies memory while handling overlapping areas.
-ft_memchr – Searches for a byte in a memory area.
-ft_memcmp – Compares two memory areas.
-ft_calloc – Allocates memory and initialises it to zero.
-4. Conversion Functions
+- Escrito em C, seguindo a **Norma** da 42.
+- Compilado com `cc` e as flags `-Wall -Wextra -Werror`.
+- Sem variáveis globais; funções auxiliares são declaradas como `static`.
+- A biblioteca é criada com o comando `ar` (o uso de `libtool` é proibido).
+- Sem memory leaks e sem crashes inesperados (segfault, bus error, double free…).
 
-Functions for converting values between different data types.
+### Visão geral da biblioteca
 
-ft_atoi – Converts a string into an integer.
-ft_itoa – Converts an integer into a string.
-5. Additional String Functions
+#### Parte 1 – Funções da libc
 
-Utility functions that extend the basic string manipulation functionality.
+| Categoria | Funções |
+| --- | --- |
+| Verificação de caracteres | `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint` |
+| Conversão de caracteres | `ft_toupper`, `ft_tolower` |
+| Memória | `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp` |
+| Strings | `ft_strlen`, `ft_strlcpy`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr` |
+| Conversão | `ft_atoi` |
+| Alocação (`malloc`) | `ft_calloc`, `ft_strdup` |
 
-ft_substr – Extracts a substring from a string.
-ft_strjoin – Joins two strings into a new string.
-ft_strtrim – Removes specified characters from the beginning and end of a string.
-ft_split – Splits a string into an array of strings using a delimiter.
-ft_strmapi – Applies a function to each character of a string.
-ft_striteri – Applies a function to each character using its index.
-6. File Descriptor Functions
+As funções de verificação de caracteres retornam `1` se o caractere pertence à classe testada e `0` caso contrário.
 
-Functions for writing characters, strings and numbers to file descriptors.
+#### Parte 2 – Funções adicionais
 
-ft_putchar_fd – Writes a character to a file descriptor.
-ft_putstr_fd – Writes a string to a file descriptor.
-ft_putendl_fd – Writes a string followed by a newline.
-ft_putnbr_fd – Writes an integer to a file descriptor.
-7. Linked List Functions (Bonus)
+| Função | Descrição |
+| --- | --- |
+| `ft_substr` | Retorna uma nova substring de `s`, começando no índice `start`, com tamanho máximo `len`. |
+| `ft_strjoin` | Retorna uma nova string resultante da concatenação de `s1` e `s2`. |
+| `ft_strtrim` | Retorna uma cópia de `s1` sem os caracteres de `set` no início e no fim. |
+| `ft_split` | Divide `s` usando o delimitador `c` e retorna um array de strings terminado em `NULL`. |
+| `ft_itoa` | Converte um inteiro (incluindo negativos) em uma nova string alocada. |
+| `ft_strmapi` | Aplica `f` a cada caractere de `s` (com o seu índice) e retorna uma nova string com os resultados. |
+| `ft_striteri` | Aplica `f` a cada caractere de `s`, passado por endereço para poder ser modificado diretamente. |
+| `ft_putchar_fd` | Escreve o caractere `c` no file descriptor `fd`. |
+| `ft_putstr_fd` | Escreve a string `s` no file descriptor `fd`. |
+| `ft_putendl_fd` | Escreve a string `s` seguida de uma quebra de linha em `fd`. |
+| `ft_putnbr_fd` | Escreve o inteiro `n` em `fd`. |
 
-The bonus part of Libft introduces singly linked lists, allowing the creation and manipulation of dynamic data structures.
+#### Parte 3 – Listas ligadas
 
-Each node is represented by the t_list structure, which contains:
+A seguinte estrutura é declarada no `libft.h`:
 
-content – A pointer to the data stored in the node.
-next – A pointer to the next node in the list.
+```c
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+```
 
-The linked list functions include:
+- `content`: o dado guardado no nó (`void *` permite guardar qualquer tipo de dado).
+- `next`: o endereço do próximo nó, ou `NULL` se for o último.
 
-ft_lstnew – Creates a new list node.
-ft_lstadd_front – Adds a node to the beginning of the list.
-ft_lstsize – Returns the number of nodes in the list.
-ft_lstlast – Returns the last node.
-ft_lstadd_back – Adds a node to the end of the list.
-ft_lstdelone – Deletes a node and frees its content.
-ft_lstclear – Deletes and frees an entire list.
-ft_lstiter – Applies a function to the content of each node.
-ft_lstmap – Creates a new list by applying a function to each node's content.
-Resources
+| Função | Descrição |
+| --- | --- |
+| `ft_lstnew` | Aloca e retorna um novo nó com o `content` recebido e `next` igual a `NULL`. |
+| `ft_lstadd_front` | Adiciona um nó no início da lista. |
+| `ft_lstadd_back` | Adiciona um nó no fim da lista. |
+| `ft_lstsize` | Conta o número de nós da lista. |
+| `ft_lstlast` | Retorna o último nó da lista. |
+| `ft_lstdelone` | Libera o conteúdo de um nó com `del` e depois libera o nó (mas não o próximo). |
+| `ft_lstclear` | Apaga e libera um nó e todos os seguintes, e define o ponteiro da lista como `NULL`. |
+| `ft_lstiter` | Aplica `f` ao conteúdo de cada nó. |
+| `ft_lstmap` | Cria uma nova lista com os resultados de aplicar `f` ao conteúdo de cada nó (usa `del` se uma alocação falhar). |
 
-The following resources were used during the development of this project.
+### Instruções
 
-Makefile
+#### Requisitos
 
-These resources helped me understand how Makefiles work, including compilation rules, dependencies and build automation.
+- Um sistema Unix (Linux ou macOS)
+- `cc` (ou `gcc`/`clang`) e `make`
 
-GeeksforGeeks – How to Use Make Utility to Build C Projects
-Makefile Tutorial
-YouTube – Makefile Tutorial
-Linked Lists
+#### Compilação
 
-These videos helped me understand linked lists, their structure, node management and the operations performed on them.
+Clone o repositório e compile a biblioteca:
 
-YouTube – Linked Lists Tutorial
-YouTube – Linked Lists Tutorial
-C Documentation
-cppreference – C Language
-Artificial Intelligence
+```bash
+git clone <url_do_seu_repositorio> libft
+cd libft
+make
+```
 
-AI tools were used as supplementary learning and productivity resources during the development of this project.
+Isso cria a biblioteca estática `libft.a` na raiz do repositório.
 
-They were used for:
+#### Regras do Makefile
 
-Understanding concepts: Clarifying certain C programming concepts, particularly memory functions, memory allocation and pointer manipulation.
-Testing support: Helping with the creation and organisation of a main.c file to test the implemented functions.
-Documentation: Assisting with the structure and writing of this README file.
+| Regra | Descrição |
+| --- | --- |
+| `make` / `make all` | Compila os arquivos e cria a `libft.a` |
+| `make clean` | Remove os arquivos objeto (`.o`) |
+| `make fclean` | Remove os arquivos objeto e a `libft.a` |
+| `make re` | Executa `fclean` e depois `all` |
 
-AI was used to support learning, clarify doubts and improve development efficiency. The generated suggestions were reviewed and adapted during the development process.
+#### Usando a biblioteca
 
-Final Notes
+Inclua o header no seu código:
 
-Libft was an important opportunity to strengthen my understanding of C programming, particularly memory management, pointers, string manipulation and data structures.
+```c
+#include "libft.h"
 
-The library will also serve as a foundation for future projects throughout the 42 curriculum.
+int	main(void)
+{
+	char	*s;
+
+	s = ft_strjoin("Olá, ", "42!");
+	if (!s)
+		return (1);
+	ft_putendl_fd(s, 1);
+	free(s);
+	return (0);
+}
+```
+
+Depois compile o seu programa ligando-o à `libft.a`:
+
+```bash
+cc -Wall -Wextra -Werror main.c -L. -lft -o meu_programa
+./meu_programa
+```
+
+> **Nota:** `strlcpy`, `strlcat` e `bzero` não fazem parte da glibc por padrão. Para comparar as versões `ft_` com as originais no Linux, inclua `<bsd/string.h>` e compile com `-lbsd`.
+
+### Recursos
+
+#### Referências
+
+- Man pages do Linux de cada função original (`man 3 strlen`, `man 3 memmove`, etc.)
+- [Makefile Tutorial](https://makefiletutorial.com/): guia completo para escrever Makefiles
+- [Learn make in 60 seconds – Jacob Sorber](https://www.youtube.com/watch?v=a8mPKBxQ9No)
+- [How To Make a Makefile for Beginners! – HenrikM Dev](https://www.youtube.com/watch?v=HmbByRhh3Sk)
+- [All you need to know about linked lists, Libft – Oceano](https://www.youtube.com/watch?v=mkZYMKwKkvI)
+- [Short introduction to linked lists in C – CodeVault](https://www.youtube.com/watch?v=uBZHMkpsTfg)
+
+#### Uso de IA
+
+A IA foi usada como **ferramenta de estudo**, e não para gerar o código do projeto:
+
+- **Entendimento de conceitos**: para obter explicações sobre o funcionamento de algumas funções (por exemplo, a diferença entre `memcpy` e `memmove` quando há sobreposição de memória) e sobre conceitos de memória, como alocação dinâmica com `malloc`/`free`, ponteiros e memory leaks.
+- **Documentação**: para ajudar a escrever e estruturar este README.
+
+Todo o código deste repositório foi escrito, testado e revisado por mim.
